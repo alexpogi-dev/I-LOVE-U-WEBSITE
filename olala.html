@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Debut Website</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8bbd0, #fce4ec);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #4a0033;
+    }
+
+    /* PASSWORD SCREEN */
+    #login {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      margin-top: 50px;
+      transition: opacity 0.5s ease;
+    }
+
+    #login h1 { color: #ad1457; }
+
+    #login input {
+      width: 100%; padding: 12px; margin: 15px 0;
+      border-radius: 10px; border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    #login button {
+      width: 100%; padding: 12px; border-radius: 20px;
+      border: none; background: #ad1457; color: #fff; cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      transition: transform 0.2s;
+    }
+    #login button:hover { transform: scale(1.05); }
+
+    #error { color: red; display: none; margin-top: 10px; }
+
+    /* MAIN SITE */
+    #site {
+      width: 100%;
+      min-height: 100vh;
+      text-align: center;
+      padding: 60px 20px;
+      display: none; /* hidden until unlocked */
+      transition: opacity 0.5s ease;
+    }
+
+    .buttons { margin-top: 40px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+    .buttons button {
+      padding: 18px 30px; border-radius: 30px; border: none;
+      background: #ad1457; color: #fff; font-size: 1.1rem; cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .buttons button:hover { transform: scale(1.05); }
+
+    .section {
+      display: none; 
+      margin-top: 50px; 
+      background: #fff;
+      padding: 30px; 
+      border-radius: 20px; 
+      max-width: 800px; 
+      margin-inline: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* VIDEO GALLERY */
+    .video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .video-box {
+      background: #f8bbd0;
+      padding: 15px;
+      border-radius: 15px;
+    }
+
+    .video-box video {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    /* IMAGE GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .gallery div {
+      background: #f8bbd0;
+      padding: 15px;
+      border-radius: 15px;
+    }
+
+    .gallery img {
+      width: 100%; height: 250px; object-fit: cover;
+      border-radius: 15px; cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover { transform: scale(1.05); }
+
+    .caption {
+      margin-top: 10px; font-size: 0.95rem; line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PASSWORD PAGE -->
+  <div id="login">
+    <h1>💖 Welcome 💖</h1>
+    <p>Enter the password to unlock, or skip to view the site</p>
+    <input type="password" id="password" placeholder="Enter password" />
+    <button onclick="checkPassword()">Unlock Website</button>
+    <button onclick="skipPassword()" style="background:#f06292;">Skip</button>
+    <p id="error">Incorrect password</p>
+  </div>
+
+  <!-- MAIN SITE -->
+  <div id="site">
+    <h2>✨ My Debut ✨</h2>
+    <p>A private space made with love</p>
+
+    <div class="buttons">
+      <button onclick="showSection('letter')">💌 Love Letter</button>
+      <button onclick="showSection('music')">🎶 Music</button>
+      <button onclick="showSection('gallery')">📸 Gallery</button>
+    </div>
+
+    <div id="letter" class="section active">
+      <h3>My Love Letter</h3>
+      <p>
+        This debut marks a beautiful chapter of my life.
+        Thank you for loving me, supporting me, and walking with me
+        as I step into adulthood with grace and courage.
+      </p>
+    </div>
+
+    <div id="music" class="section">
+      <h3>🎶 Our Song & Moments</h3>
+      <p>Let our memories play while the music fills the moment 💕</p>
+      <audio controls>
+        <source src="assets/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+      <div class="video-gallery">
+        <div class="video-box">
+          <video controls muted preload="metadata" loading="lazy">
+            <source src="assets/video1.mp4" type="video/mp4">
+          </video>
+          <p class="caption">Our first unforgettable moment together 💖</p>
+        </div>
+        <div class="video-box">
+          <video controls muted preload="metadata" loading="lazy">
+            <source src="assets/video2.mp4" type="video/mp4">
+          </video>
+          <p class="caption">A simple day, but with you it became special 🌸</p>
+        </div>
+        <div class="video-box">
+          <video controls muted preload="metadata" loading="lazy">
+            <source src="assets/video3.mp4" type="video/mp4">
+          </video>
+          <p class="caption">Every laugh, every smile — I treasure this moment forever ✨</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="gallery" class="section">
+      <h3>My Gallery</h3>
+      <p>Each photo holds a memory. Write your story under every picture 💕</p>
+      <div class="gallery">
+        <div>
+          <img src="assets/photo1.jpg" alt="First memory" loading="lazy">
+          <p class="caption">Write your paragraph here about this photo.</p>
+        </div>
+        <div>
+          <img src="assets/photo2.jpg" alt="Second memory" loading="lazy">
+          <p class="caption">Share the story behind this memory.</p>
+        </div>
+        <div>
+          <img src="assets/photo3.jpg" alt="Third memory" loading="lazy">
+          <p class="caption">What makes this picture meaningful?</p>
+        </div>
+        <div>
+          <img src="assets/photo4.jpg" alt="Fourth memory" loading="lazy">
+          <p class="caption">Describe the feeling of this moment.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const correctPassword = "debut18";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value.trim();
+      const error = document.getElementById("error");
+      const login = document.getElementById("login");
+      const site = document.getElementById("site");
+
+      if (input === correctPassword) {
+        error.style.display = "none";
+        login.style.display = "none";
+        site.style.display = "block";
+      } else {
+        error.style.display = "block";
+      }
+    }
+
+    function skipPassword() {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("site").style.display = "block";
+    }
+
+    document.getElementById("password").addEventListener("keyup", function(e) {
+      if (e.key === "Enter") checkPassword();
+    });
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
